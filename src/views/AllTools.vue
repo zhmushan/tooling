@@ -20,7 +20,7 @@ function getMenuKeyByLabel(label: string): string {
           :to="getMenuKeyByLabel(`${label}_${chLabel}`)"
           style="text-decoration: none"
         >
-          <n-card :title="label" size="large" hoverable style="cursor: pointer">
+          <n-card :title="chLabel" size="large" hoverable style="cursor: pointer">
             <n-p>{{ desc }}</n-p>
           </n-card>
         </router-link>
