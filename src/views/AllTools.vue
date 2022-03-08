@@ -10,14 +10,14 @@ function getMenuKeyByLabel(label: string): string {
 
 <template>
   <template v-for="([label, children], index) of menuGroups" v-bind:key="index">
-    <n-h3 style="margin-top: 0">{{ label }}</n-h3>
+    <n-h3>{{ label }}</n-h3>
     <n-grid x-gap="12" y-gap="8" cols="4 xs:2 s:3" responsive="screen">
       <n-grid-item
-        v-for="([label, desc], index) of children"
-        v-bind:key="index"
+        v-for="([chLabel, desc], chIndex) of children"
+        v-bind:key="chIndex"
       >
         <router-link
-          :to="getMenuKeyByLabel(label)"
+          :to="getMenuKeyByLabel(`${label}_${chLabel}`)"
           style="text-decoration: none"
         >
           <n-card :title="label" size="large" hoverable style="cursor: pointer">

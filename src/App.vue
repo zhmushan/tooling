@@ -14,11 +14,11 @@ const menuOptions: MenuOption[] = [
       type: "group",
       label,
       key,
-      children: children.map(([label]) => {
-        const key = getMenuKeyByLabel(label);
-        MenuOption_Key_Label.set(key, label);
+      children: children.map(([childLabel]) => {
+        const key = getMenuKeyByLabel(`${label}_${childLabel}`);
+        MenuOption_Key_Label.set(key, childLabel);
         return {
-          label,
+          label: childLabel,
           key,
         };
       }),
@@ -73,7 +73,6 @@ const renderMenuLabel = (option: MenuOption): VNodeChild => {
   <n-config-provider :theme="theme">
     <n-message-provider>
       <n-dialog-provider>
-        <reload-prompt />
         <n-layout position="absolute" has-sider>
           <n-layout-sider bordered :width="240">
             <n-menu

@@ -12,8 +12,12 @@ const router = createRouter({
       component: () => import("@/views/AllTools.vue"),
     },
     {
-      path: "/qr_code",
+      path: "/generators_qr_code",
       component: () => import("@/views/generators/QrCode.vue"),
+    },
+    {
+      path: "/parsers_url",
+      component: () => import("@/views/parsers/Url.vue"),
     },
   ],
 });
