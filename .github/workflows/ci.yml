@@ -21,6 +21,7 @@ jobs:
           nci
           nr lint
           nr build
+          cp dist/index.html dist/404.html
 
       - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
