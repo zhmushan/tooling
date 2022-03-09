@@ -6,6 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      BasePublicPath: ${{ secrets.BASE_PUBLIC_PATH }}
+
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.1.0
