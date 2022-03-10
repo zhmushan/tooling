@@ -15,9 +15,10 @@ import CryptoWorker from "@/workers/crypto?worker";
 const cryptoWorker = new CryptoWorker();
 
 cryptoWorker.addEventListener("message", (ev) => {
-  if (typeof ev.data === "string") {
-    outputValueRef.value = ev.data;
-  }
+  const { result, size, time } = ev.data;
+  resultRef.value = result;
+  sizeRef.value = size;
+  timeRef.value = time;
 });
 
 const digestAlgorithms = [
@@ -49,7 +50,9 @@ const digestAlgorithms = [
 ] as const;
 
 const inputValueRef = ref<string>();
-const outputValueRef = ref<string>();
+const resultRef = ref<string>("");
+const sizeRef = ref<number>(0);
+const timeRef = ref<number>(0);
 const algoRef = ref<typeof digestAlgorithms[number]>("MD5");
 
 watch(
@@ -76,7 +79,9 @@ watch(
       </n-grid-item>
       <n-grid-item>
         <n-h3>Output</n-h3>
-        <n-p>{{ outputValueRef }}</n-p>
+        <n-p>{{ algoRef }}: {{ resultRef }}</n-p>
+        <n-p>Size: {{ sizeRef / 1024 }} KB</n-p>
+        <n-p>Time: {{ timeRef }} ms</n-p>
       </n-grid-item>
     </n-grid>
   </n-card>
