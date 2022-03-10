@@ -4,7 +4,7 @@ import { NCard, NGrid, NGridItem, NP, NH3 } from "naive-ui";
 import { menuGroups } from "@/menu";
 
 function getMenuKeyByLabel(label: string): string {
-  return `/${label.toLowerCase().replace(/\s+/g, "_")}`;
+  return `/${label.toLowerCase().replace(/[^a-z0-9]+/g, "_")}`;
 }
 </script>
 

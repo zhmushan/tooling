@@ -13,6 +13,13 @@ const menuGroups: MenuGroup[] = [
     ],
   ],
   ["Parsers", [["URL", "Parse the URL to what you want it to look like."]]],
+  [
+    "Encoders / Decoders",
+    [
+      ["Base64", "Encode and decode Base64 data."],
+      ["GZip", "Compress or decompress text."],
+    ],
+  ],
 ];
 
 export { menuGroups };

@@ -68,9 +68,9 @@ watch(
       <n-input v-model:value="inputValueRef" type="textarea" rows="12" />
     </template>
     <template #output>
-      <n-p>{{ algoRef }}: {{ resultRef }}</n-p>
-      <n-p>Size: {{ sizeRef / 1024 }} KB</n-p>
-      <n-p>Time: {{ timeRef }} ms</n-p>
+      <n-p class="break-all">{{ algoRef }}: {{ resultRef }}</n-p>
+      <n-p class="break-all">Size: {{ sizeRef / 1024 }} KB</n-p>
+      <n-p class="break-all">Time: {{ timeRef }} ms</n-p>
     </template>
   </my-layout>
 </template>

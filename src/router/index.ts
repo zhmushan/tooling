@@ -23,6 +23,14 @@ const router = createRouter({
       path: "/parsers_url",
       component: () => import("@/views/parsers/Url.vue"),
     },
+    {
+      path: "/encoders_decoders_base64",
+      component: () => import("@/views/encoders_decoders/Base64.vue"),
+    },
+    {
+      path: "/encoders_decoders_gzip",
+      component: () => import("@/views/encoders_decoders/GZip.vue"),
+    },
   ],
 });
 

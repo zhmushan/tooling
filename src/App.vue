@@ -27,7 +27,7 @@ const menuOptions: MenuOption[] = [
 ];
 
 function getMenuKeyByLabel(label: string): string {
-  return `/${label.toLowerCase().replace(/\s+/g, "_")}`;
+  return `/${label.toLowerCase().replace(/[^a-z0-9]+/g, "_")}`;
 }
 </script>
 
@@ -100,5 +100,9 @@ const renderMenuLabel = (option: MenuOption): VNodeChild => {
 <style>
 :root {
   --panel-min-w: 300px;
+}
+
+.break-all {
+  word-break: break-all;
 }
 </style>
