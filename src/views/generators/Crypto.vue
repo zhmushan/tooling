@@ -1,16 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import {
-  NInput,
-  NGrid,
-  NGridItem,
-  NCard,
-  NH3,
-  NP,
-  NSpace,
-  NSelect,
-} from "naive-ui";
+import { NP, NSelect, NInput } from "naive-ui";
 import CryptoWorker from "@/workers/crypto?worker";
+import MyLayout from "@/views/components/Layout.vue";
 
 const cryptoWorker = new CryptoWorker();
 
@@ -64,25 +56,21 @@ watch(
 </script>
 
 <template>
-  <n-card style="flex-grow: 1">
-    <n-grid cols="1 m:2" x-gap="12" y-gap="12" responsive="screen">
-      <n-grid-item>
-        <n-space>
-          <n-h3>Input</n-h3>
-          <n-select
-            v-model:value="algoRef"
-            :options="digestAlgorithms.map((i) => ({ label: i, value: i }))"
-            :consistent-menu-width="false"
-          />
-        </n-space>
-        <n-input v-model:value="inputValueRef" type="textarea" rows="12" />
-      </n-grid-item>
-      <n-grid-item>
-        <n-h3>Output</n-h3>
-        <n-p>{{ algoRef }}: {{ resultRef }}</n-p>
-        <n-p>Size: {{ sizeRef / 1024 }} KB</n-p>
-        <n-p>Time: {{ timeRef }} ms</n-p>
-      </n-grid-item>
-    </n-grid>
-  </n-card>
+  <my-layout>
+    <template #input-header-extra>
+      <n-select
+        v-model:value="algoRef"
+        :options="digestAlgorithms.map((i) => ({ label: i, value: i }))"
+        :consistent-menu-width="false"
+      />
+    </template>
+    <template #input>
+      <n-input v-model:value="inputValueRef" type="textarea" rows="12" />
+    </template>
+    <template #output>
+      <n-p>{{ algoRef }}: {{ resultRef }}</n-p>
+      <n-p>Size: {{ sizeRef / 1024 }} KB</n-p>
+      <n-p>Time: {{ timeRef }} ms</n-p>
+    </template>
+  </my-layout>
 </template>

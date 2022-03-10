@@ -85,7 +85,7 @@ const renderMenuLabel = (option: MenuOption): VNodeChild => {
             />
           </n-layout-sider>
           <n-layout
-            content-style="padding: 24px; display: flex; flex-direction: column; height: 100%;"
+            content-style="padding: 24px; display: flex; flex-direction: column; height: 100%; min-width: var(--panel-min-w)"
             :native-scrollbar="false"
           >
             <n-h1>{{ selectedMenuLabelRef }}</n-h1>
@@ -96,3 +96,9 @@ const renderMenuLabel = (option: MenuOption): VNodeChild => {
     </n-message-provider>
   </n-config-provider>
 </template>
+
+<style>
+:root {
+  --panel-min-w: 300px;
+}
+</style>
