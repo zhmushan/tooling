@@ -1,4 +1,6 @@
 <script lang="ts">
+import { useMemo } from "vooks";
+import { useIsMobile, useIsTablet } from "@/utils/composables";
 import { menuGroups } from "./menu";
 
 const RootMenuItem = { label: "All tools", key: "/all_tools" };
@@ -26,6 +28,9 @@ const menuOptions: MenuOption[] = [
   }),
 ];
 
+const isMobileRef = useIsMobile();
+const isTabletRef = useIsTablet();
+
 function getMenuKeyByLabel(label: string): string {
   return `/${label.toLowerCase().replace(/[^a-z0-9]+/g, "_")}`;
 }
@@ -50,8 +55,10 @@ import {
   NSpace,
   NButton,
   NIcon,
+  NPopover,
+  type PopoverInst,
 } from "naive-ui";
-import { LogoGithub } from "@vicons/ionicons5";
+import { LogoGithub, MenuOutline } from "@vicons/ionicons5";
 import { DarkModeOutlined, LightModeOutlined } from "@vicons/material";
 
 const enum Theme {
@@ -63,6 +70,10 @@ const themeRef = ref(useOsTheme().value === "dark" ? Theme.Dark : Theme.Light);
 const pathRef = ref<string>();
 const selectedMenuLabelRef = ref<string>();
 const selectedMenuDespRef = ref<string>();
+const showSiderRef = useMemo(() => {
+  return !isMobileRef.value && !isTabletRef.value;
+});
+const mobilePopoverRef = ref<PopoverInst>();
 
 watch(toRef(useRoute(), "path"), (path) => {
   pathRef.value = path;
@@ -105,7 +116,7 @@ function changeTheme(theme: Theme): Theme {
             <n-space justify="end" item-style="display: inline-flex;">
               <n-button
                 text
-                style="font-size: 28px"
+                style="font-size: var(--header-icon-size)"
                 @click="themeRef = changeTheme(themeRef)"
               >
                 <n-icon>
@@ -118,20 +129,53 @@ function changeTheme(theme: Theme): Theme {
                 tag="a"
                 href="https://github.com/zhmushan/tooling"
                 target="_blank"
-                style="font-size: 28px"
+                style="font-size: var(--header-icon-size)"
               >
                 <n-icon>
                   <logo-github />
                 </n-icon>
               </n-button>
+              <n-popover
+                v-if="!showSiderRef"
+                ref="mobilePopoverRef"
+                style="padding: 0; width: 288px"
+                placement="bottom-end"
+                display-directive="show"
+                trigger="click"
+              >
+                <template #trigger>
+                  <n-button
+                    v-if="!showSiderRef"
+                    text
+                    style="font-size: var(--header-icon-size)"
+                  >
+                    <n-icon>
+                      <menu-outline />
+                    </n-icon>
+                  </n-button>
+                </template>
+                <section style="max-height: 79vh">
+                  <n-menu
+                    :value="pathRef"
+                    :options="menuOptions"
+                    :render-label="renderMenuLabel"
+                    @update:value="
+                      (_, { label }) => {
+                        selectedMenuLabelRef = String(label);
+                        mobilePopoverRef!.setShow(false);
+                      }
+                    "
+                  />
+                </section>
+              </n-popover>
             </n-space>
           </n-affix>
-          <n-layout-sider bordered :width="240">
+          <n-layout-sider v-if="showSiderRef" bordered :width="240">
             <n-menu
               :value="pathRef"
               :options="menuOptions"
               :render-label="renderMenuLabel"
-              v-on:update-value="
+              @update:value="
                 (_, { label }) => (selectedMenuLabelRef = String(label))
               "
             />
@@ -141,9 +185,9 @@ function changeTheme(theme: Theme): Theme {
             :native-scrollbar="false"
           >
             <n-h1>{{ selectedMenuLabelRef }}</n-h1>
-            <n-p v-if="selectedMenuDespRef" style="margin-top: 0">
-              {{ selectedMenuDespRef }}
-            </n-p>
+            <n-p v-if="selectedMenuDespRef" style="margin-top: 0">{{
+              selectedMenuDespRef
+            }}</n-p>
             <router-view />
           </n-layout>
         </n-layout>
@@ -160,6 +204,7 @@ function changeTheme(theme: Theme): Theme {
 :root {
   --panel-min-w: 300px;
   --header-h: 44px;
+  --header-icon-size: 28px;
 }
 
 .break-all {

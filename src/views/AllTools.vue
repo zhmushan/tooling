@@ -10,11 +10,11 @@ function getMenuKeyByLabel(label: string): string {
 
 <template>
   <template v-for="([label, children], index) of menuGroups" v-bind:key="index">
-    <n-h3>{{ label }}</n-h3>
+    <n-h3 :style="{ marginTop: index === 0 ? 0 : undefined }">{{ label }}</n-h3>
     <n-grid
       x-gap="12"
       y-gap="8"
-      cols="1 400:2 900:4 1400:6 1900:8 2400:10 2900:12"
+      cols="1 400:2 640:3 1400:6 1900:8 2400:10 2900:12"
     >
       <n-grid-item
         v-for="([chLabel, desc], chIndex) of children"
