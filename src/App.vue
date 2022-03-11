@@ -46,9 +46,20 @@ import {
   NH1,
   NDialogProvider,
   NP,
+  NAffix,
+  NSpace,
+  NButton,
+  NIcon,
 } from "naive-ui";
+import { LogoGithub } from "@vicons/ionicons5";
+import { DarkModeOutlined, LightModeOutlined } from "@vicons/material";
 
-const theme = useOsTheme().value === "dark" ? darkTheme : undefined;
+const enum Theme {
+  Light,
+  Dark,
+}
+
+const themeRef = ref(useOsTheme().value === "dark" ? Theme.Dark : Theme.Light);
 const pathRef = ref<string>();
 const selectedMenuLabelRef = ref<string>();
 const selectedMenuDespRef = ref<string>();
@@ -71,13 +82,50 @@ const renderMenuLabel = (option: MenuOption): VNodeChild => {
     { default: () => label }
   );
 };
+
+function changeTheme(theme: Theme): Theme {
+  if (Theme.Light === theme) {
+    return Theme.Dark;
+  }
+
+  return Theme.Light;
+}
 </script>
 
 <template>
-  <n-config-provider :theme="theme">
+  <n-config-provider :theme="themeRef === Theme.Dark ? darkTheme : undefined">
     <n-message-provider>
       <n-dialog-provider>
         <n-layout position="absolute" has-sider>
+          <n-affix
+            :top="0"
+            class="w-full"
+            style="z-index: 1; height: var(--header-h); padding: 8px 16px 0"
+          >
+            <n-space justify="end" item-style="display: inline-flex;">
+              <n-button
+                text
+                style="font-size: 28px"
+                @click="themeRef = changeTheme(themeRef)"
+              >
+                <n-icon>
+                  <light-mode-outlined v-if="themeRef === Theme.Light" />
+                  <dark-mode-outlined v-else />
+                </n-icon>
+              </n-button>
+              <n-button
+                text
+                tag="a"
+                href="https://github.com/zhmushan/tooling"
+                target="_blank"
+                style="font-size: 28px"
+              >
+                <n-icon>
+                  <logo-github />
+                </n-icon>
+              </n-button>
+            </n-space>
+          </n-affix>
           <n-layout-sider bordered :width="240">
             <n-menu
               :value="pathRef"
@@ -93,9 +141,9 @@ const renderMenuLabel = (option: MenuOption): VNodeChild => {
             :native-scrollbar="false"
           >
             <n-h1>{{ selectedMenuLabelRef }}</n-h1>
-            <n-p v-if="selectedMenuDespRef" style="margin-top: 0">{{
-              selectedMenuDespRef
-            }}</n-p>
+            <n-p v-if="selectedMenuDespRef" style="margin-top: 0">
+              {{ selectedMenuDespRef }}
+            </n-p>
             <router-view />
           </n-layout>
         </n-layout>
@@ -105,11 +153,20 @@ const renderMenuLabel = (option: MenuOption): VNodeChild => {
 </template>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --panel-min-w: 300px;
+  --header-h: 44px;
 }
 
 .break-all {
   word-break: break-all;
+}
+
+.w-full {
+  width: 100%;
 }
 </style>

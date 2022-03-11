@@ -24,7 +24,7 @@ watch(inputValueRef, async (v) => {
       <n-image
         v-if="qrcodeDataUrlRef"
         :src="qrcodeDataUrlRef"
-        :img-props="{ style: 'width: 100%' }"
+        :img-props="{ class: ['w-full'] }"
         alt="QR Code"
       />
     </template>
