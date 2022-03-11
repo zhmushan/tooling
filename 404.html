@@ -3,21 +3,44 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
   <title>Tooling</title>
-  <meta name="description" content="Your app description">
+  <meta name="description" content="A collection of useful tools.">
   <link rel="icon" href="/tooling/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/tooling/favicon.ico" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/tooling/apple-touch-icon.png" sizes="180x180">
   <link rel="mask-icon" href="/tooling/favicon.svg" color="#FFFFFF">
   <meta name="theme-color" content="#ffffff">
-  <script type="module" crossorigin src="/tooling/assets/index.a5070723.js"></script>
+  <script type="module" crossorigin src="/tooling/assets/index.9568728b.js"></script>
   <link rel="modulepreload" href="/tooling/assets/vendor.2e9626ac.js">
   <link rel="stylesheet" href="/tooling/assets/index.7bdba7d9.css">
 </head>
 
 <body>
   <div id="app"></div>
+  <script>
+    let lastTime = 0;
+    document.addEventListener(
+      "touchstart",
+      (evt) => {
+        if (evt.touches.length > 1) {
+          evt.preventDefault();
+        }
+      },
+      { passive: false },
+    );
+    document.addEventListener(
+      "touchend",
+      (evt) => {
+        const nowTime = new Date().getTime();
+        if (nowTime - lastTime <= 300) {
+          evt.preventDefault();
+        }
+        lastTime = nowTime;
+      },
+      { passive: false },
+    );
+  </script>
   
 </body>
 
