@@ -3,9 +3,9 @@ import { ref, watch } from "vue";
 import { NInput, NP } from "naive-ui";
 import MyLayout from "@/views/components/Layout.vue";
 
-const inputRef = ref<string>('');
+const inputRef = ref<string>("");
 const outputRef = ref<string>();
-watch(inputRef, value => outputRef.value = btoa(value));
+watch(inputRef, (value) => (outputRef.value = btoa(value)));
 </script>
 
 <template>

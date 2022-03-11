@@ -2,23 +2,23 @@
 import { menuGroups } from "./menu";
 
 const RootMenuItem = { label: "All tools", key: "/all_tools" };
-const MenuOption_Key_Label = new Map<string, string>([
-  [RootMenuItem.key, RootMenuItem.label],
+const MenuOption_Key_Label = new Map<string, [string, string?]>([
+  [RootMenuItem.key, [RootMenuItem.label]],
 ]);
 const menuOptions: MenuOption[] = [
   RootMenuItem,
   ...menuGroups.map(([label, children]) => {
     const key = getMenuKeyByLabel(label);
-    MenuOption_Key_Label.set(key, label);
+    MenuOption_Key_Label.set(key, [label]);
     return {
       type: "group",
       label,
       key,
-      children: children.map(([childLabel]) => {
-        const key = getMenuKeyByLabel(`${label}_${childLabel}`);
-        MenuOption_Key_Label.set(key, childLabel);
+      children: children.map(([chLabel, chDesp]) => {
+        const key = getMenuKeyByLabel(`${label}_${chLabel}`);
+        MenuOption_Key_Label.set(key, [chLabel, chDesp]);
         return {
-          label: childLabel,
+          label: chLabel,
           key,
         };
       }),
@@ -45,15 +45,19 @@ import {
   useOsTheme,
   NH1,
   NDialogProvider,
+  NP,
 } from "naive-ui";
 
 const theme = useOsTheme().value === "dark" ? darkTheme : undefined;
 const pathRef = ref<string>();
 const selectedMenuLabelRef = ref<string>();
+const selectedMenuDespRef = ref<string>();
 
 watch(toRef(useRoute(), "path"), (path) => {
   pathRef.value = path;
-  selectedMenuLabelRef.value = MenuOption_Key_Label.get(path);
+  [selectedMenuLabelRef.value, selectedMenuDespRef.value] =
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    MenuOption_Key_Label.get(path)!;
 });
 
 const renderMenuLabel = (option: MenuOption): VNodeChild => {
@@ -89,6 +93,9 @@ const renderMenuLabel = (option: MenuOption): VNodeChild => {
             :native-scrollbar="false"
           >
             <n-h1>{{ selectedMenuLabelRef }}</n-h1>
+            <n-p v-if="selectedMenuDespRef" style="margin-top: 0">{{
+              selectedMenuDespRef
+            }}</n-p>
             <router-view />
           </n-layout>
         </n-layout>

@@ -41,7 +41,7 @@ function arrayBufferToBase64(buffer: ArrayBuffer) {
   for (var i = 0; i < len; i++) {
     binary += String.fromCharCode(bytes[i]);
   }
-  return window.btoa(binary);
+  return btoa(binary);
 }
 </script>
 
