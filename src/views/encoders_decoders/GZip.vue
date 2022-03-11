@@ -14,8 +14,12 @@ watch(inputRef, async (value) => {
 
 async function compress(s: string) {
   const byteArray = encoder.encode(s);
-  // eslint-disable-next-line no-undef
-  const cs = new CompressionStream("gzip");
+  if (!window.CompressionStream) {
+    window.CompressionStream = (
+      await import("@stardazed/streams-compression")
+    ).CompressionStream;
+  }
+  const cs = new window.CompressionStream("gzip");
   const writer = cs.writable.getWriter();
   writer.write(byteArray);
   writer.close();
@@ -24,8 +28,12 @@ async function compress(s: string) {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function decompress(byteArray: ArrayBuffer) {
-  // eslint-disable-next-line no-undef
-  const cs = new DecompressionStream("gzip");
+  if (!window.DecompressionStream) {
+    window.DecompressionStream = (
+      await import("@stardazed/streams-compression")
+    ).DecompressionStream;
+  }
+  const cs = new window.DecompressionStream("gzip");
   const writer = cs.writable.getWriter();
   writer.write(byteArray);
   writer.close();
