@@ -1,9 +1,27 @@
 <script setup lang="ts">
-import { NCard, NGrid, NGridItem, NH3, NSpace } from "naive-ui";
+import { NCard, NGrid, NGridItem, NH3, NSpace, NAlert } from "naive-ui";
+import { onErrorCaptured, ref } from "vue";
+
+defineProps<{
+  showError?: boolean;
+}>();
+
+const errMsgRef = ref<string>();
+const errTitleRef = ref<string>();
+
+onErrorCaptured((err, _, info) => {
+  errMsgRef.value = err.message;
+  errTitleRef.value = info;
+});
 </script>
 
 <template>
   <n-card style="flex-grow: 1">
+    <template v-if="showError" #header>
+      <n-alert :title="errTitleRef" type="error" closable>{{
+        errMsgRef
+      }}</n-alert>
+    </template>
     <n-grid cols="1 m:2" x-gap="12" y-gap="12" responsive="screen">
       <n-grid-item>
         <n-space>
