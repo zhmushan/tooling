@@ -10,7 +10,7 @@ import {
 } from "naive-ui";
 import { MenuOutline, LogoGithub } from "@vicons/ionicons5";
 import { LightModeOutlined, DarkModeOutlined } from "@vicons/material";
-import { Theme, useThemeStore } from "@/stores/theme";
+import { useThemeStore } from "@/stores/theme";
 import AppMenu from "./AppMenu.vue";
 
 defineProps<{
@@ -34,7 +34,7 @@ const mobilePopoverRef = ref<PopoverInst>();
         @click="themeStore.changedFrom(themeStore.theme)"
       >
         <n-icon>
-          <light-mode-outlined v-if="Theme.Light === themeStore.theme" />
+          <light-mode-outlined v-if="themeStore.theme === 'light'" />
           <dark-mode-outlined v-else />
         </n-icon>
       </n-button>

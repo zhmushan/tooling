@@ -12,7 +12,7 @@ import {
 } from "naive-ui";
 import { useMemo } from "vooks";
 import { useIsMobile, useIsTablet } from "@/utils/composables";
-import { Theme, useThemeStore } from "@/stores/theme";
+import { useThemeStore } from "@/stores/theme";
 import { usePageStore } from "@/stores/page";
 import AppHeader from "./AppHeader.vue";
 import AppMenu from "./AppMenu.vue";
@@ -29,7 +29,7 @@ const pageStore = usePageStore();
 
 <template>
   <n-config-provider
-    :theme="themeStore.theme === Theme.Dark ? darkTheme : undefined"
+    :theme="themeStore.theme === 'dark' ? darkTheme : undefined"
   >
     <n-message-provider>
       <n-dialog-provider>
@@ -43,9 +43,9 @@ const pageStore = usePageStore();
             :native-scrollbar="false"
           >
             <n-h1>{{ pageStore.label }}</n-h1>
-            <n-p v-if="pageStore.desc" style="margin-top: 0">{{
-              pageStore.desc
-            }}</n-p>
+            <n-p v-if="pageStore.desc" style="margin-top: 0">
+              {{ pageStore.desc }}
+            </n-p>
             <router-view />
           </n-layout>
         </n-layout>

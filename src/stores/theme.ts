@@ -2,18 +2,15 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useOsTheme } from "naive-ui";
 
-export const enum Theme {
-  Light,
-  Dark,
-}
+type Theme = "dark" | "light";
 
 export const useThemeStore = defineStore("theme", () => {
-  const themeRef = ref(
-    useOsTheme().value === "dark" ? Theme.Dark : Theme.Light
-  );
+  const localStore = localStorage.getItem("theme") as Theme | null;
+  const themeRef = ref<Theme>(localStore ?? useOsTheme().value ?? "light");
 
   function changedFrom(theme: Theme) {
-    themeRef.value = Theme.Light === theme ? Theme.Dark : Theme.Light;
+    themeRef.value = theme === "light" ? "dark" : "light";
+    localStorage.setItem("theme", themeRef.value);
   }
 
   return {
