@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
+import { toRef, watch, ref } from "vue";
+import { RouterView, useRoute } from "vue-router";
 import {
   NLayout,
   NLayoutSider,
@@ -13,7 +14,7 @@ import {
 import { useMemo } from "vooks";
 import { useIsMobile, useIsTablet } from "@/utils/composables";
 import { useThemeStore } from "@/stores/theme";
-import { usePageStore } from "@/stores/page";
+import { MenuOption_Key_Info } from "./menu";
 import AppHeader from "./AppHeader.vue";
 import AppMenu from "./AppMenu.vue";
 
@@ -24,7 +25,15 @@ const showSiderRef = useMemo(() => {
 });
 
 const themeStore = useThemeStore();
-const pageStore = usePageStore();
+
+const selectedMenuLabelRef = ref<string>();
+const selectedMenuDescRef = ref<string>();
+
+watch(toRef(useRoute(), "path"), (path) => {
+  [selectedMenuLabelRef.value, selectedMenuDescRef.value] =
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    MenuOption_Key_Info.get(path)!;
+});
 </script>
 
 <template>
@@ -42,9 +51,9 @@ const pageStore = usePageStore();
             content-style="padding: 24px; display: flex; flex-direction: column; height: 100%; min-width: var(--panel-min-w)"
             :native-scrollbar="false"
           >
-            <n-h1>{{ pageStore.label }}</n-h1>
-            <n-p v-if="pageStore.desc" style="margin-top: 0">
-              {{ pageStore.desc }}
+            <n-h1>{{ selectedMenuLabelRef }}</n-h1>
+            <n-p v-if="selectedMenuDescRef" style="margin-top: 0">
+              {{ selectedMenuDescRef }}
             </n-p>
             <router-view />
           </n-layout>

@@ -1,4 +1,5 @@
 import type { RouteComponent } from "vue-router";
+import type { MenuOption } from "naive-ui";
 
 type MenuItem = {
   label: string;
@@ -63,4 +64,25 @@ export const MenuGroups: MenuGroup[] = [
       },
     ],
   ],
+];
+
+export const MenuOption_Key_Info = new Map<
+  string,
+  [label: string, desc?: string]
+>([[MenuRoot.path, [MenuRoot.label]]]);
+
+export const menuOptions: MenuOption[] = [
+  { label: MenuRoot.label, key: MenuRoot.path },
+  ...MenuGroups.map(([label, path, children]) => {
+    return {
+      type: "group",
+      label,
+      key: path,
+      children: children.map((ch) => {
+        const key = `${path}${ch.path}`;
+        MenuOption_Key_Info.set(key, [ch.label, ch.desc]);
+        return { label: ch.label, key };
+      }),
+    };
+  }),
 ];
