@@ -1,0 +1,11 @@
+.flex {
+  display: flex;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+.w-full {
+  width: 100%;
+}
