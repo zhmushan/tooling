@@ -9,9 +9,9 @@ defineProps<{
 const errMsgRef = ref<string>();
 const errTitleRef = ref<string>();
 
-onErrorCaptured((err, _, info) => {
+onErrorCaptured((err) => {
   errMsgRef.value = err.message;
-  errTitleRef.value = info;
+  errTitleRef.value = err.name;
 });
 </script>
 
