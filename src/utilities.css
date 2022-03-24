@@ -9,3 +9,11 @@
 .w-full {
   width: 100%;
 }
+
+.outline-none {
+  outline: none;
+}
+
+.h-full {
+  height: 100%;
+}

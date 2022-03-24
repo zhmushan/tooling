@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@stardazed/streams-compression": "^1.0.0",
+    "highlight.js": "^11.5.0",
     "pinia": "^2.0.11",
     "qrcode": "^1.5.0",
     "vooks": "^0.2.12",

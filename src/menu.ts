@@ -35,6 +35,18 @@ export const MenuGroups: MenuGroup[] = [
     ],
   ],
   [
+    "Converters",
+    "/converters",
+    [
+      {
+        label: "Data Formats",
+        desc: "Freedom to travel between various data formats such as json, yaml, toml, etc.",
+        path: "/data-formats",
+        component: () => import("@/views/converters/DataFormats.vue"),
+      },
+    ],
+  ],
+  [
     "Parsers",
     "/parsers",
     [

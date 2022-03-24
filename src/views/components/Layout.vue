@@ -31,7 +31,10 @@ onErrorCaptured((err) => {
         <slot name="input"></slot>
       </n-grid-item>
       <n-grid-item>
-        <n-h3>Output</n-h3>
+        <n-space>
+          <n-h3>Output</n-h3>
+          <slot name="output-header-extra"></slot>
+        </n-space>
         <slot name="output"></slot>
       </n-grid-item>
     </n-grid>

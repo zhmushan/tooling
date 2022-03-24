@@ -35,9 +35,9 @@ watch(toRef(useRoute(), "path"), (path) => {
       :native-scrollbar="false"
     >
       <n-h1>{{ selectedMenuLabelRef }}</n-h1>
-      <n-p v-if="selectedMenuDescRef" style="margin-top: 0">{{
-        selectedMenuDescRef
-      }}</n-p>
+      <n-p v-if="selectedMenuDescRef" style="margin-top: 0">
+        {{ selectedMenuDescRef }}
+      </n-p>
       <router-view />
     </n-layout>
   </n-layout>
