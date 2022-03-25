@@ -14,13 +14,13 @@ onErrorCaptured(() => {
 function encode(v: string) {
   showErrorRef.value = false;
   inputRef.value = v;
-  outputRef.value = btoa(v);
+  outputRef.value = btoa(unescape(encodeURIComponent(v)));
 }
 
 function decode(v: string) {
   showErrorRef.value = false;
   outputRef.value = v;
-  inputRef.value = atob(v);
+  inputRef.value = decodeURIComponent(escape(atob(v)));
 }
 </script>
 
