@@ -40,7 +40,10 @@ watchEffect(async () => {
       <n-input v-model:value="inputValueRef" type="textarea" rows="12" />
     </template>
     <template #output>
-      <n-card v-show="inputValueRef" content-style="padding: 0;">
+      <n-card
+        v-show="inputValueRef"
+        content-style="padding: 0; max-width: 400px;"
+      >
         <canvas ref="canvasRef" class="w-full"></canvas>
       </n-card>
     </template>
