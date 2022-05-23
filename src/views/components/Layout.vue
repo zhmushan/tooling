@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { NCard, NGrid, NGridItem, NH3, NSpace, NAlert } from "naive-ui";
-import { onErrorCaptured, ref } from "vue";
+import { onErrorCaptured, ref, watch } from "vue";
 
-defineProps<{
-  showError?: boolean;
+const props = defineProps<{
+  showError?: boolean | Error;
 }>();
 
 const errMsgRef = ref<string>();
 const errTitleRef = ref<string>();
+
+watch(
+  () => props.showError,
+  (err) => {
+    if (err instanceof Error) {
+      [errMsgRef.value, errTitleRef.value] = [err.message, err.name];
+    }
+  }
+);
 
 onErrorCaptured((err) => {
   errMsgRef.value = err.message;
