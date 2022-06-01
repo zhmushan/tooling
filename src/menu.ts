@@ -1,76 +1,78 @@
 import type { RouteComponent } from "vue-router";
-import type { MenuOption } from "naive-ui";
+
+type Label = `label.${keyof typeof import("./locales/en.json").label}`;
+type Desc = `desc.${keyof typeof import("./locales/en.json").desc}`;
 
 type MenuItem = {
-  label: string;
-  desc: string;
+  label: Label;
+  desc: Desc;
   path: `/${string}`;
   component: () => Promise<RouteComponent>;
 };
-type MenuGroup = [label: string, path: `/${string}`, children: MenuItem[]];
+type MenuGroup = [label: Label, path: `/${string}`, children: MenuItem[]];
 
 export const MenuRoot: Omit<MenuItem, "desc"> = {
-  label: "All Tools",
+  label: "label.all_tools",
   path: "/all",
   component: () => import("@/views/AllTools.vue"),
 };
 
 export const MenuGroups: MenuGroup[] = [
   [
-    "Generators",
+    "label.generators",
     "/generators",
     [
       {
-        label: "QR Code",
-        desc: "Generate QR code based on the input.",
+        label: "label.qrcode",
+        desc: "desc.qrcode",
         path: "/qrcode",
         component: () => import("@/views/generators/QrCode.vue"),
       },
       {
-        label: "Crypto",
-        desc: "Provides a series of cryptographic functions that I don't know if they are useful.",
+        label: "label.crypto",
+        desc: "desc.crypto",
         path: "/crypto",
         component: () => import("@/views/generators/Crypto.vue"),
       },
     ],
   ],
   [
-    "Converters",
+    "label.converters",
     "/converters",
     [
       {
-        label: "Data Formats",
-        desc: "Freedom to travel between various data formats such as json, yaml, toml, etc.",
+        label: "label.data_formats",
+        desc: "desc.data_formats",
         path: "/data-formats",
         component: () => import("@/views/converters/DataFormats.vue"),
       },
     ],
   ],
   [
-    "Parsers",
+    "label.parsers",
     "/parsers",
     [
       {
-        label: "URL",
-        desc: "Parse the URL to what you want it to look like.",
+        label: "label.url",
+        desc: "desc.url",
         path: "/url",
         component: () => import("@/views/parsers/Url.vue"),
       },
     ],
   ],
   [
-    "Encoders / Decoders",
+    "label.encoders_and_decoders",
     "/encoders-decoders",
     [
       {
-        label: "Base64",
-        desc: "Encode and decode Base64 data.",
+        label: "label.base64",
+        desc: "desc.base64",
         path: "/base64",
         component: () => import("@/views/encoders-decoders/Base64.vue"),
       },
       {
-        label: "GZip",
-        desc: "Compress or decompress text.",
+        label: "label.gzip",
+        desc: "desc.gzip",
         path: "/gzip",
         component: () => import("@/views/encoders-decoders/GZip.vue"),
       },
@@ -83,18 +85,8 @@ export const MenuOption_Key_Info = new Map<
   [label: string, desc?: string]
 >([[MenuRoot.path, [MenuRoot.label]]]);
 
-export const menuOptions: MenuOption[] = [
-  { label: MenuRoot.label, key: MenuRoot.path },
-  ...MenuGroups.map(([label, path, children]) => {
-    return {
-      type: "group",
-      label,
-      key: path,
-      children: children.map((ch) => {
-        const key = `${path}${ch.path}`;
-        MenuOption_Key_Info.set(key, [ch.label, ch.desc]);
-        return { label: ch.label, key };
-      }),
-    };
-  }),
-];
+for (const [, path, children] of MenuGroups) {
+  for (const ch of children) {
+    MenuOption_Key_Info.set(`${path}${ch.path}`, [ch.label, ch.desc]);
+  }
+}

@@ -34,9 +34,9 @@ watch(toRef(useRoute(), "path"), (path) => {
       content-style="padding: 24px; display: flex; flex-direction: column; height: 100%; min-width: var(--panel-min-w)"
       :native-scrollbar="false"
     >
-      <n-h1>{{ selectedMenuLabelRef }}</n-h1>
+      <n-h1 v-if="selectedMenuLabelRef">{{ $t(selectedMenuLabelRef) }}</n-h1>
       <n-p v-if="selectedMenuDescRef" style="margin-top: 0">
-        {{ selectedMenuDescRef }}
+        {{ $t(selectedMenuDescRef) }}
       </n-p>
       <router-view />
     </n-layout>

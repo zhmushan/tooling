@@ -1,0 +1,30 @@
+{
+  "label": {
+    "all_tools": "所有工具",
+    "generators": "生成器",
+    "converters": "转换器",
+    "parsers": "解析器",
+    "encoders_and_decoders": "编码器 / 解码器",
+    "qrcode": "二维码",
+    "crypto": "密码分析",
+    "data_formats": "数据格式",
+    "url": "统一资源定位符",
+    "base64": "基底六十四",
+    "gzip": "革奴压缩"
+  },
+  "desc": {
+    "qrcode": "根据输入的信息生成二维码。",
+    "crypto": "提供了一系列的加密功能，我不知道它们是否有用。",
+    "data_formats": "在各种数据格式之间自由穿梭，如json、yaml、toml等。",
+    "url": "把统一资源定位符解析成你想要的样子。",
+    "base64": "对基底六十四数据进行编码和解码。",
+    "gzip": "压缩或解压文本。"
+  },
+
+  "Input": "输入",
+  "Output": "输出",
+  "Size": "尺寸",
+  "Time": "时间",
+  "KB": "千位元组",
+  "ms": "毫秒"
+}

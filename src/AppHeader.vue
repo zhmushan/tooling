@@ -10,6 +10,7 @@ import {
 } from "naive-ui";
 import { MenuOutline, LogoGithub } from "@vicons/ionicons5";
 import { LightModeOutlined, DarkModeOutlined } from "@vicons/material";
+import { useI18n } from "vue-i18n";
 import { useThemeStore } from "@/stores/theme";
 import AppMenu from "./AppMenu.vue";
 
@@ -19,6 +20,13 @@ defineProps<{
 
 const themeStore = useThemeStore();
 const mobilePopoverRef = ref<PopoverInst>();
+
+const { locale } = useI18n();
+function changeLang() {
+  const curr = locale.value;
+  locale.value = curr === "zh" ? "en" : "zh";
+  localStorage.setItem("locale", locale.value);
+}
 </script>
 
 <template>
@@ -28,6 +36,9 @@ const mobilePopoverRef = ref<PopoverInst>();
     style="z-index: 1; height: var(--header-h); padding: 8px 16px 0"
   >
     <n-space justify="end" item-style="display: inline-flex;">
+      <n-button text strong @click="changeLang">
+        {{ locale === "zh" ? "English" : "中文" }}
+      </n-button>
       <n-button
         text
         style="font-size: var(--header-icon-size)"

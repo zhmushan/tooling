@@ -11,7 +11,7 @@ A collection of useful tools - https://tooling.vercel.app
 
   We certainly need to implement more and more tools, and you can contribute in any way you want, such as creating an [issue](https://github.com/zhmushan/tooling/issues/new/choose) or a [pull request](https://github.com/zhmushan/tooling/compare).
 
-- [ ] i18n
+- [x] i18n
 
   Someone complained to me: "I can't read English". I think we should support multiple languages, even if I need to check Wikipedia to know how to say "URL" in Chinese.
 

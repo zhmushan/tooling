@@ -9,7 +9,9 @@ import { MenuGroups } from "@/menu";
     v-for="([label, path, children], index) of MenuGroups"
     v-bind:key="index"
   >
-    <n-h3 :style="{ marginTop: index === 0 ? 0 : undefined }">{{ label }}</n-h3>
+    <n-h3 :style="{ marginTop: index === 0 ? 0 : undefined }">{{
+      $t(label)
+    }}</n-h3>
     <n-grid
       x-gap="12"
       y-gap="8"
@@ -18,12 +20,12 @@ import { MenuGroups } from "@/menu";
       <n-grid-item v-for="(ch, chIndex) of children" v-bind:key="chIndex">
         <router-link :to="`${path}${ch.path}`" style="text-decoration: none">
           <n-card
-            :title="ch.label"
+            :title="$t(ch.label)"
             size="large"
             hoverable
             style="cursor: pointer"
           >
-            <n-p>{{ ch.desc }}</n-p>
+            <n-p>{{ $t(ch.desc) }}</n-p>
           </n-card>
         </router-link>
       </n-grid-item>

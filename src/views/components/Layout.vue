@@ -34,14 +34,14 @@ onErrorCaptured((err) => {
     <n-grid cols="1 m:2" x-gap="12" y-gap="12" responsive="screen">
       <n-grid-item>
         <n-space>
-          <n-h3>Input</n-h3>
+          <n-h3>{{ $t("Input") }}</n-h3>
           <slot name="input-header-extra"></slot>
         </n-space>
         <slot name="input"></slot>
       </n-grid-item>
       <n-grid-item>
         <n-space>
-          <n-h3>Output</n-h3>
+          <n-h3>{{ $t("Output") }}</n-h3>
           <slot name="output-header-extra"></slot>
         </n-space>
         <slot name="output"></slot>

@@ -1,0 +1,30 @@
+{
+  "label": {
+    "all_tools": "All Tools",
+    "generators": "Generators",
+    "converters": "Converters",
+    "parsers": "Parsers",
+    "encoders_and_decoders": "Encoders / Decoders",
+    "qrcode": "QR Code",
+    "crypto": "Crypto",
+    "data_formats": "Data Formats",
+    "url": "URL",
+    "base64": "Base64",
+    "gzip": "GZip"
+  },
+  "desc": {
+    "qrcode": "Generate QR code based on the input.",
+    "crypto": "Provides a series of cryptographic functions that I don't know if they are useful.",
+    "data_formats": "Freedom to travel between various data formats such as json, yaml, toml, etc.",
+    "url": "Parse the URL to what you want it to look like.",
+    "base64": "Encode and decode Base64 data.",
+    "gzip": "Compress or decompress text."
+  },
+
+  "Input": "Input",
+  "Output": "Output",
+  "Size": "Size",
+  "Time": "Time",
+  "KB": "KB",
+  "ms": "ms"
+}

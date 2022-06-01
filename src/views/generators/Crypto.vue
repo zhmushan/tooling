@@ -69,8 +69,12 @@ watch(
     </template>
     <template #output>
       <n-p class="break-all">{{ algoRef }}: {{ resultRef }}</n-p>
-      <n-p class="break-all">Size: {{ sizeRef / 1024 }} KB</n-p>
-      <n-p class="break-all">Time: {{ timeRef }} ms</n-p>
+      <n-p class="break-all"
+        >{{ $t("Size") }}: {{ sizeRef / 1024 }} {{ $t("KB") }}</n-p
+      >
+      <n-p class="break-all"
+        >{{ $t("Time") }}: {{ timeRef }} {{ $t("ms") }}</n-p
+      >
     </template>
   </my-layout>
 </template>

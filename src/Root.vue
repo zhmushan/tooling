@@ -4,15 +4,20 @@ import {
   NMessageProvider,
   darkTheme,
   NDialogProvider,
+  zhCN,
+  enUS,
 } from "naive-ui";
+import { useI18n } from "vue-i18n";
 import { useThemeStore } from "@/stores/theme";
 import MyApp from "./App.vue";
 const themeStore = useThemeStore();
+const { locale } = useI18n();
 </script>
 
 <template>
   <n-config-provider
     :theme="themeStore.theme === 'dark' ? darkTheme : undefined"
+    :locale="locale === 'zh' ? zhCN : enUS"
   >
     <n-message-provider>
       <n-dialog-provider>
