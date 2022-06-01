@@ -21,4 +21,10 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  test: {
+    includeSource: ["src/**/*.{js,ts}"],
+  },
+  define: {
+    "import.meta.vitest": "undefined",
+  },
 });
