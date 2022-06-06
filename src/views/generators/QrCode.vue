@@ -8,7 +8,7 @@ import MyLayout from "@/views/components/Layout.vue";
 const themeStore = useThemeStore();
 const inputValueRef = ref<string>();
 const canvasRef = ref<HTMLCanvasElement>();
-const err = ref<Error>();
+const errRef = ref<Error>();
 
 const canvasColor = computed(() => {
   const light = "#fff";
@@ -21,13 +21,13 @@ const canvasColor = computed(() => {
 });
 
 watchEffect(() => {
-  err.value = undefined;
+  errRef.value = undefined;
   if (inputValueRef.value) {
     QRCode.toCanvas(canvasRef.value, inputValueRef.value, {
       width: 400,
       color: canvasColor.value,
     }).catch((e) => {
-      err.value = e;
+      errRef.value = e;
     });
     canvasRef.value?.removeAttribute("style");
   }
@@ -35,7 +35,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <my-layout :show-error="err" v-model:input="inputValueRef">
+  <my-layout :show-error="errRef" v-model:input="inputValueRef">
     <template #output>
       <n-card
         v-show="inputValueRef"

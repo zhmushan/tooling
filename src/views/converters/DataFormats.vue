@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Converter } from "./data-formats/converter";
-import { onErrorCaptured, ref } from "vue";
+import { onErrorCaptured, ref, watch } from "vue";
 import { NCode, NConfigProvider, NSelect } from "naive-ui";
 import hljs from "highlight.js/lib/core";
 import MyLayout from "@/views/components/Layout.vue";
@@ -25,6 +25,7 @@ const inputValueRef = ref("");
 const inputFmtRef = ref<DataFormat>(defaultInputFmt);
 const outputFmtRef = ref<DataFormat>(defaultOutputFmt);
 const outputValueRef = ref<string>();
+const errRef = ref<Error>();
 
 onErrorCaptured(() => {
   showErrorRef.value = true;
@@ -41,23 +42,25 @@ function updateOutputFmt(v: DataFormat) {
 }
 
 function convert(v: string) {
-  showErrorRef.value = false;
+  errRef.value = undefined;
   inputValueRef.value = v;
   const [parse, stringify] = [
     converters.get(inputFmtRef.value)!.parse,
     converters.get(outputFmtRef.value)!.stringify,
   ];
-  outputValueRef.value = stringify(parse(inputValueRef.value));
+  try {
+    outputValueRef.value = stringify(parse(inputValueRef.value));
+  } catch (e) {
+    errRef.value = e;
+  }
 }
+
+watch(inputValueRef, convert);
 </script>
 
 <template>
   <n-config-provider :hljs="hljs">
-    <my-layout
-      :show-error="showErrorRef"
-      :input="inputValueRef"
-      @update:input="convert"
-    >
+    <my-layout :show-error="errRef" v-model:input="inputValueRef">
       <template #input-header-extra>
         <n-select
           :value="inputFmtRef"
