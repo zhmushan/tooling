@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { NInput, NH4, NList, NListItem } from "naive-ui";
+import { NH4, NList, NListItem } from "naive-ui";
 import MyLayout from "@/views/components/Layout.vue";
 
 const inputValueRef = ref<string>();
@@ -13,10 +13,7 @@ watch(inputValueRef, async () => {
 </script>
 
 <template>
-  <my-layout>
-    <template #input>
-      <n-input v-model:value="inputValueRef" type="textarea" rows="12" />
-    </template>
+  <my-layout v-model:input="inputValueRef">
     <template #output>
       <section v-if="parsedUrlRef">
         <n-h4>URL Parts</n-h4>

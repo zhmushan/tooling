@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { NCard, NGrid, NGridItem, NH3, NSpace, NAlert } from "naive-ui";
+import { NCard, NGrid, NGridItem, NH3, NSpace, NAlert, NInput } from "naive-ui";
 import { onErrorCaptured, ref, watch } from "vue";
 
 const props = defineProps<{
   showError?: boolean | Error;
+  input?: string;
 }>();
+
+defineEmits(["update:input"]);
 
 const errMsgRef = ref<string>();
 const errTitleRef = ref<string>();
@@ -37,7 +40,12 @@ onErrorCaptured((err) => {
           <n-h3>{{ $t("Input") }}</n-h3>
           <slot name="input-header-extra"></slot>
         </n-space>
-        <slot name="input"></slot>
+        <n-input
+          type="textarea"
+          rows="12"
+          :value="input"
+          @input="$emit('update:input', $event)"
+        />
       </n-grid-item>
       <n-grid-item>
         <n-space>

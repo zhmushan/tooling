@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { NP, NSelect, NInput } from "naive-ui";
+import { NP, NSelect } from "naive-ui";
 import CryptoWorker from "@/workers/crypto?worker";
 import MyLayout from "@/views/components/Layout.vue";
 
@@ -56,16 +56,13 @@ watch(
 </script>
 
 <template>
-  <my-layout>
+  <my-layout v-model:input="inputValueRef">
     <template #input-header-extra>
       <n-select
         v-model:value="algoRef"
         :options="digestAlgorithms.map((i) => ({ label: i, value: i }))"
         :consistent-menu-width="false"
       />
-    </template>
-    <template #input>
-      <n-input v-model:value="inputValueRef" type="textarea" rows="12" />
     </template>
     <template #output>
       <n-p class="break-all">{{ algoRef }}: {{ resultRef }}</n-p>

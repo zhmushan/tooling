@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Converter } from "./data-formats/converter";
 import { onErrorCaptured, ref } from "vue";
-import { NCode, NConfigProvider, NSelect, NInput } from "naive-ui";
+import { NCode, NConfigProvider, NSelect } from "naive-ui";
 import hljs from "highlight.js/lib/core";
 import MyLayout from "@/views/components/Layout.vue";
 import modules from "./data-formats/modules";
@@ -53,21 +53,17 @@ function convert(v: string) {
 
 <template>
   <n-config-provider :hljs="hljs">
-    <my-layout :show-error="showErrorRef">
+    <my-layout
+      :show-error="showErrorRef"
+      :input="inputValueRef"
+      @update:input="convert"
+    >
       <template #input-header-extra>
         <n-select
           :value="inputFmtRef"
           :options="dataFormats.map((i) => ({ label: i, value: i }))"
           :consistent-menu-width="false"
           @update-value="updateInputFmt"
-        />
-      </template>
-      <template #input>
-        <n-input
-          :value="inputValueRef"
-          type="textarea"
-          rows="12"
-          @input="convert"
         />
       </template>
       <template #output-header-extra>

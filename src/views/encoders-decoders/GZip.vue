@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { NInput, NP } from "naive-ui";
+import { NP } from "naive-ui";
 import MyLayout from "@/views/components/Layout.vue";
 
 const encoder = new TextEncoder();
@@ -54,10 +54,7 @@ function arrayBufferToBase64(buffer: ArrayBuffer) {
 </script>
 
 <template>
-  <my-layout>
-    <template #input>
-      <n-input v-model:value="inputRef" type="textarea" rows="12" />
-    </template>
+  <my-layout v-model:input="inputRef">
     <template #output>
       <n-p class="break-all">{{ outputRef }}</n-p>
     </template>

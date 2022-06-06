@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect } from "vue";
-import { NInput, NCard } from "naive-ui";
+import { NCard } from "naive-ui";
 import QRCode from "qrcode";
 import { useThemeStore } from "@/stores/theme";
 import MyLayout from "@/views/components/Layout.vue";
@@ -20,7 +20,7 @@ const canvasColor = computed(() => {
   return { light: dark, dark: light };
 });
 
-watchEffect(async () => {
+watchEffect(() => {
   err.value = undefined;
   if (inputValueRef.value) {
     QRCode.toCanvas(canvasRef.value, inputValueRef.value, {
@@ -35,10 +35,7 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <my-layout :show-error="err">
-    <template #input>
-      <n-input v-model:value="inputValueRef" type="textarea" rows="12" />
-    </template>
+  <my-layout :show-error="err" v-model:input="inputValueRef">
     <template #output>
       <n-card
         v-show="inputValueRef"

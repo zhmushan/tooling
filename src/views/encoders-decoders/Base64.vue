@@ -25,10 +25,11 @@ function decode(v: string) {
 </script>
 
 <template>
-  <my-layout :show-error="showErrorRef">
-    <template #input>
-      <n-input :value="inputRef" type="textarea" rows="12" @input="encode" />
-    </template>
+  <my-layout
+    :show-error="showErrorRef"
+    :input="inputRef"
+    @update:input="encode"
+  >
     <template #output>
       <n-input :value="outputRef" type="textarea" rows="12" @input="decode" />
     </template>
