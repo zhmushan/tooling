@@ -9,7 +9,7 @@ if (import.meta.vitest) {
       ["木杉", "H4sIAAAAAAAAE3s2Z8WzuZ0ABsESEAYAAAA="],
       ["👋🀄️", "H4sIAAAAAAAAE/swf2L3h/kNLe939AMAOOhtqQsAAAA="],
     ];
-    for (const [input, output] of cases) {
+    for (const [input] of cases) {
       expect(await decompress(await compress(input))).toEqual(input);
     }
   });

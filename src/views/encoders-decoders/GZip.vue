@@ -11,17 +11,25 @@ const errRef = ref<Error>();
 function encode(v: string) {
   errRef.value = undefined;
   inputRef.value = v;
-  compress(v)
-    .then((v) => (outputRef.value = v))
-    .catch((e) => (errRef.value = e));
+  if (v) {
+    compress(v)
+      .then((v) => (outputRef.value = v))
+      .catch((e) => (errRef.value = e));
+  } else {
+    outputRef.value = "";
+  }
 }
 
 function decode(v: string) {
   errRef.value = undefined;
   outputRef.value = v;
-  decompress(v)
-    .then((v) => (inputRef.value = v))
-    .catch((e) => (errRef.value = e));
+  if (v) {
+    decompress(v)
+      .then((v) => (inputRef.value = v))
+      .catch((e) => (errRef.value = e));
+  } else {
+    inputRef.value = "";
+  }
 }
 </script>
 
