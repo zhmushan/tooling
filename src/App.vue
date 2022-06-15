@@ -31,7 +31,13 @@ watch(toRef(useRoute(), "path"), (path) => {
       <app-menu />
     </n-layout-sider>
     <n-layout
-      content-style="padding: 24px; display: flex; flex-direction: column; height: 100%; min-width: var(--panel-min-w)"
+      content-style="
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-width: var(--panel-min-w);
+      "
       :native-scrollbar="false"
     >
       <n-h1 v-if="selectedMenuLabelRef">{{ $t(selectedMenuLabelRef) }}</n-h1>

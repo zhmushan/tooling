@@ -1,62 +1,34 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { NP } from "naive-ui";
+import { ref } from "vue";
+import { NInput } from "naive-ui";
 import MyLayout from "@/views/components/Layout.vue";
+import { compress, decompress } from "./gzip";
 
-const encoder = new TextEncoder();
-const decoder = new TextDecoder();
 const inputRef = ref<string>("");
-const outputRef = ref<string>();
-watch(inputRef, async (value) => {
-  const buf = await compress(value);
-  outputRef.value = arrayBufferToBase64(buf);
-});
+const outputRef = ref<string>("");
+const errRef = ref<Error>();
 
-async function compress(s: string) {
-  const byteArray = encoder.encode(s);
-  if (!window.CompressionStream) {
-    window.CompressionStream = (
-      await import("@stardazed/streams-compression")
-    ).CompressionStream;
-  }
-  const cs = new window.CompressionStream("gzip");
-  const writer = cs.writable.getWriter();
-  writer.write(byteArray);
-  writer.close();
-  return new Response(cs.readable).arrayBuffer();
+function encode(v: string) {
+  errRef.value = undefined;
+  inputRef.value = v;
+  compress(v)
+    .then((v) => (outputRef.value = v))
+    .catch((e) => (errRef.value = e));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function decompress(byteArray: ArrayBuffer) {
-  if (!window.DecompressionStream) {
-    window.DecompressionStream = (
-      await import("@stardazed/streams-compression")
-    ).DecompressionStream;
-  }
-  const cs = new window.DecompressionStream("gzip");
-  const writer = cs.writable.getWriter();
-  writer.write(byteArray);
-  writer.close();
-  return new Response(cs.readable).arrayBuffer().then(function (arrayBuffer) {
-    return decoder.decode(arrayBuffer);
-  });
-}
-
-function arrayBufferToBase64(buffer: ArrayBuffer) {
-  var binary = "";
-  var bytes = new Uint8Array(buffer);
-  var len = bytes.byteLength;
-  for (var i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
+function decode(v: string) {
+  errRef.value = undefined;
+  outputRef.value = v;
+  decompress(v)
+    .then((v) => (inputRef.value = v))
+    .catch((e) => (errRef.value = e));
 }
 </script>
 
 <template>
-  <my-layout v-model:input="inputRef">
+  <my-layout :show-error="errRef" :input="inputRef" @update:input="encode">
     <template #output>
-      <n-p class="break-all">{{ outputRef }}</n-p>
+      <n-input :value="outputRef" type="textarea" rows="12" @input="decode" />
     </template>
   </my-layout>
 </template>

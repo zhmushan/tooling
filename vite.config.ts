@@ -22,6 +22,7 @@ export default defineConfig({
     },
   },
   test: {
+    environment: "jsdom",
     includeSource: ["src/**/*.{js,ts}"],
   },
   define: {
