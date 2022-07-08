@@ -25,21 +25,17 @@ watch(toRef(useRoute(), "path"), (path) => {
 </script>
 
 <template>
-  <n-layout position="absolute" has-sider>
+  <n-layout has-sider :class="[showSiderRef ? 'h-screen' : 'h-full']">
     <app-header :show-menu="!showSiderRef" />
-    <n-layout-sider v-if="showSiderRef" bordered :width="240">
+    <n-layout-sider v-if="showSiderRef" bordered :width="240" class="h-screen">
       <app-menu />
     </n-layout-sider>
-    <n-layout
-      content-style="
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        min-width: var(--panel-min-w);
-      "
-      :native-scrollbar="false"
-    >
+    <n-layout content-style="
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      min-width: var(--panel-min-w);
+    ">
       <n-h1 v-if="selectedMenuLabelRef">{{ $t(selectedMenuLabelRef) }}</n-h1>
       <n-p v-if="selectedMenuDescRef" style="margin-top: 0">
         {{ $t(selectedMenuDescRef) }}

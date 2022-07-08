@@ -32,7 +32,7 @@ watch(inputValueRef, async () => {
             v-bind:key="key"
           >
             <template #prefix>{{ key }}</template>
-            {{ value }}
+            <span class="break-all">{{ value }}</span>
           </n-list-item>
         </n-list>
       </section>

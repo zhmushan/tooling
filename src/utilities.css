@@ -6,14 +6,27 @@
   word-break: break-all;
 }
 
+.break-normal {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
 .w-full {
   width: 100%;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .outline-none {
   outline: none;
 }
 
-.h-full {
-  height: 100%;
+.fixed {
+  position: fixed;
+}
+
+.h-screen {
+  height: 100vh;
 }

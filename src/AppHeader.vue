@@ -32,7 +32,7 @@ function changeLang() {
 <template>
   <n-affix
     :top="0"
-    class="w-full"
+    class="w-full fixed"
     style="z-index: 1; height: var(--header-h); padding: 8px 16px 0"
   >
     <n-space justify="end" item-style="display: inline-flex;">

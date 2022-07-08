@@ -17,6 +17,11 @@ app.use(router);
 app.use(i18n);
 app.mount("#app");
 
+router.isReady().then(async () => {
+  const { registerSW } = await import("virtual:pwa-register");
+  registerSW({ immediate: true });
+});
+
 if (import.meta.vitest) {
   const { it, expect } = import.meta.vitest;
   it("mount", () => {

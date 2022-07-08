@@ -28,7 +28,7 @@ onErrorCaptured((err) => {
 </script>
 
 <template>
-  <n-card style="flex-grow: 1">
+  <n-card style="flex-grow: 1" class="break-normal">
     <template v-if="showError" #header>
       <n-alert :title="errTitleRef" type="error" closable>{{
         errMsgRef

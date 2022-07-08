@@ -6,6 +6,7 @@ import {
   NDialogProvider,
   zhCN,
   enUS,
+  NGlobalStyle,
 } from "naive-ui";
 import { useI18n } from "vue-i18n";
 import { useThemeStore } from "@/stores/theme";
@@ -24,6 +25,7 @@ const { locale } = useI18n();
         <my-app />
       </n-dialog-provider>
     </n-message-provider>
+    <n-global-style />
   </n-config-provider>
 </template>
 
@@ -32,6 +34,11 @@ const { locale } = useI18n();
 
 * {
   box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 :root {
