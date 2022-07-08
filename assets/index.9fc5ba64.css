@@ -1,0 +1,1 @@
+.flex{display:flex}.break-all{word-break:break-all}.break-normal{overflow-wrap:normal;word-break:normal}.w-full{width:100%}.h-full{height:100%}.outline-none{outline:none}.fixed{position:fixed}.h-screen{height:100vh}*{box-sizing:border-box;scrollbar-width:none}::-webkit-scrollbar{display:none}:root{--panel-min-w: 300px;--header-h: 44px;--header-icon-size: 28px}
