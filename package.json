@@ -1,6 +1,7 @@
 {
   "name": "tooling",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -11,36 +12,36 @@
   },
   "dependencies": {
     "@stardazed/streams-compression": "^1.0.0",
-    "highlight.js": "^11.5.1",
-    "pinia": "^2.0.14",
-    "qrcode": "^1.5.0",
+    "highlight.js": "^11.6.0",
+    "pinia": "^2.0.21",
+    "qrcode": "^1.5.1",
     "vooks": "^0.2.12",
-    "vue": "^3.2.37",
+    "vue": "^3.2.38",
     "vue-i18n": "next",
-    "vue-router": "^4.1.1"
+    "vue-router": "^4.1.5"
   },
   "devDependencies": {
-    "@intlify/vite-plugin-vue-i18n": "^4.0.0",
+    "@intlify/vite-plugin-vue-i18n": "^6.0.1",
     "@rushstack/eslint-patch": "^1.1.4",
-    "@types/jsdom": "^16.2.14",
-    "@types/node": "^18.0.3",
-    "@types/qrcode": "^1.4.2",
+    "@types/jsdom": "^20.0.0",
+    "@types/node": "^18.7.14",
+    "@types/qrcode": "^1.5.0",
     "@vicons/ionicons5": "^0.12.0",
     "@vicons/material": "^0.12.0",
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue": "^3.0.3",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vue/test-utils": "^2.0.2",
     "@vue/tsconfig": "^0.1.3",
-    "eslint": "^8.19.0",
-    "eslint-plugin-vue": "^9.2.0",
+    "eslint": "^8.23.0",
+    "eslint-plugin-vue": "^9.4.0",
     "jsdom": "^20.0.0",
-    "naive-ui": "^2.31.0",
+    "naive-ui": "^2.33.1",
     "prettier": "^2.7.1",
-    "typescript": "^4.7.4",
-    "vite": "^2.9.13",
-    "vite-plugin-pwa": "^0.12.2",
-    "vitest": "^0.17.1",
-    "vue-tsc": "^0.38.3"
+    "typescript": "~4.7.4",
+    "vite": "^3.0.9",
+    "vite-plugin-pwa": "^0.12.4",
+    "vitest": "^0.22.1",
+    "vue-tsc": "^0.40.5"
   }
 }

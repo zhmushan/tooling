@@ -53,6 +53,9 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     includeSource: ["src/**/*.{js,ts}"],
+    deps: {
+      inline: ["date-fns"],
+    },
   },
   define: {
     "import.meta.vitest": "undefined",
